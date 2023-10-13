@@ -1,12 +1,12 @@
-const pool = require('../config/db_connect');
+const pool = require("../config/db_connect");
 
-const queryExecution = async(query) => {
+const queryExecution = async (query) => {
   try {
-    const result = await pool.query(query)
-    return result.rows
+    const result = await pool.query(query);
+    return result.rows;
   } catch (err) {
-    return false
+    return false;
   }
-}
+};
 
-module.exports = { queryExecution }
+module.exports = { queryExecution };

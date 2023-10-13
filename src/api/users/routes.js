@@ -1,21 +1,21 @@
-const express = require('express')
-const router = express.Router()
+const express = require("express");
+const router = express.Router();
 const {
-  getAllUserHandler, 
+  getAllUserHandler,
   getUserByIdHandler,
   addUserHandler,
   updateUserHandler,
   deleteUserHandler,
-} = require('./handler')
+} = require("./handler");
 
-router.get('/', getAllUserHandler)
+router.get("/", getAllUserHandler);
 
-router.get('/:id', getUserByIdHandler)
+router.get("/:id", getUserByIdHandler);
 
-router.post('/', addUserHandler)
+router.post("/", addUserHandler);
 
-router.put('/:id', updateUserHandler)
+router.put("/:id", updateUserHandler);
 
-router.delete('/:id', deleteUserHandler)
+router.delete("/:id", deleteUserHandler);
 
 module.exports = router;

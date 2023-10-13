@@ -1,21 +1,21 @@
-const express = require('express')
-const router = express.Router()
+const express = require("express");
+const router = express.Router();
 const {
-  getAllFilmHandler, 
+  getAllFilmHandler,
   getFilmByIdHandler,
   addFilmHandler,
   updateFilmHandler,
   deleteFilmHandler,
-} = require('./handler')
+} = require("./handler");
 
-router.get('/', getAllFilmHandler)
+router.get("/", getAllFilmHandler);
 
-router.get('/:id', getFilmByIdHandler)
+router.get("/:id", getFilmByIdHandler);
 
-router.post('/', addFilmHandler)
+router.post("/", addFilmHandler);
 
-router.put('/:id', updateFilmHandler)
+router.put("/:id", updateFilmHandler);
 
-router.delete('/:id', deleteFilmHandler)
+router.delete("/:id", deleteFilmHandler);
 
 module.exports = router;

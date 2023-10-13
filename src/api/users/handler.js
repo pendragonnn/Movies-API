@@ -1,65 +1,65 @@
-const { 
-  getAllUserService, 
+const {
+  getAllUserService,
   getUserByIdService,
   addUserService,
   updateUserService,
-  deleteUserService
-  } = require('../../services/userService')
+  deleteUserService,
+} = require("../../services/userService");
 
-const { errorHandling } = require('../../exception/errorHandling')
+const { errorHandling } = require("../../exception/errorHandling");
 
-const getAllUserHandler = async(req, res) => {
-  const { page, size } = req.query
+const getAllUserHandler = async (req, res) => {
+  const { page, size } = req.query;
 
-  const users = await getAllUserService(page, size)
-  
-  errorHandling(res, users)
-}
+  const users = await getAllUserService(page, size);
 
-const getUserByIdHandler = async(req, res) => {
-  const { id } = req.params
-  const userId = await getUserByIdService(id)
+  errorHandling(res, users);
+};
 
-  errorHandling(res, userId)
-}
+const getUserByIdHandler = async (req, res) => {
+  const { id } = req.params;
+  const userId = await getUserByIdService(id);
 
-const addUserHandler = async(req, res) => {
-  const { id, email, gender, password, role } = req.body
+  errorHandling(res, userId);
+};
 
-  if(!id || !email || !gender || !password || !role) {
-    res.status(400).json({ status: 'fail', msg: 'empty data'})
+const addUserHandler = async (req, res) => {
+  const { id, email, gender, password, role } = req.body;
+
+  if (!id || !email || !gender || !password || !role) {
+    res.status(400).json({ status: "fail", msg: "empty data" });
   } else {
-    const userId = await addUserService(id, email, gender, password, role)
-  
-    errorHandling(res, userId)
+    const userId = await addUserService(id, email, gender, password, role);
+
+    errorHandling(res, userId);
   }
-}
+};
 
-const updateUserHandler = async(req, res) => {
-  const { id } = req.params
-  const { email, gender, password, role } = req.body
+const updateUserHandler = async (req, res) => {
+  const { id } = req.params;
+  const { email, gender, password, role } = req.body;
 
-  if(!email || !gender || !password || !role) {
-    res.status(400).json({ status: 'fail', msg: 'empty data'})
+  if (!email || !gender || !password || !role) {
+    res.status(400).json({ status: "fail", msg: "empty data" });
   } else {
-    const userId = await updateUserService(id, email, gender, password, role)
+    const userId = await updateUserService(id, email, gender, password, role);
 
-    errorHandling(res, userId)
+    errorHandling(res, userId);
   }
-}
+};
 
-const deleteUserHandler = async(req, res) => {
-  const id = req.params.id
+const deleteUserHandler = async (req, res) => {
+  const id = req.params.id;
 
-  const userId = await deleteUserService(id)
+  const userId = await deleteUserService(id);
 
-  errorHandling(res, userId)
-}
+  errorHandling(res, userId);
+};
 
 module.exports = {
   getAllUserHandler,
   getUserByIdHandler,
   addUserHandler,
   updateUserHandler,
-  deleteUserHandler
-}
+  deleteUserHandler,
+};
