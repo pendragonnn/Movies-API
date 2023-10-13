@@ -1,0 +1,707 @@
+{
+  "components": {
+    "schemas": {
+      "Films": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "example": 1009,
+            "type": "integer"
+          },
+          "title": {
+            "example": "Upin & Ipin Shippuden",
+            "type": "string"
+          },
+          "genres": {
+            "example": "Adventure|Action|Comedy",
+            "type": "string"
+          },
+          "year": {
+            "example": "2069",
+            "type": "string"
+          }
+        }
+      },
+      "Users": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "example": 1009,
+            "type": "integer"
+          },
+          "email": {
+            "example": "agathaivory04@gmail.com",
+            "type": "string"
+          },
+          "gender": {
+            "example": "Female",
+            "type": "string"
+          },
+          "password": {
+            "example": "gatagatagata",
+            "type": "string"
+          },
+          "role": {
+            "example": "Student",
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Movies API",
+    "description": "Movies API Documentation",
+    "version": "1.0.0"
+  },
+  "server": [
+    {
+      "url": "http://localhost:5000",
+      "description": "localhost"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Authentication and Authorization",
+      "description": "Authentication and Authorization User"
+    },
+    {
+      "name": "Films",
+      "description": "CRUD API Operation for Film data"
+    },
+    {
+      "name": "Users",
+      "description": "CRUD API Operation for user data"
+    }
+  ],
+  "paths": {
+    "/register": {
+      "post": {
+        "tags": [
+          "Authentication and Authorization"
+        ],
+        "summary": "User Register",
+        "description": "For User Register",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "example": "1000",
+                    "type": "integer"
+                  },
+                  "email": {
+                    "example": "wisnuandika104@gmail.com",
+                    "type": "string"
+                  },
+                  "gender": {
+                    "example": "Male",
+                    "type": "string"
+                  },
+                  "password": {
+                    "example": "infolokerboskumantab",
+                    "type": "string"
+                  },
+                  "role": {
+                    "example": "Student",
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "success"
+          },
+          "400": {
+            "description": "bad request"
+          },
+          "404": {
+            "description": "not found"
+          },
+          "500": {
+            "description": "internal server error"
+          },
+          "403": {
+            "description": "forbidden"
+          },
+          "401": {
+            "description": "unauthorized"
+          }
+        }
+      }
+    },
+    "/login": {
+      "post": {
+        "tags": [
+          "Authentication and Authorization"
+        ],
+        "summary": "User Login",
+        "description": "For User Login",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "example": "wisnuandika104@gmail.com",
+                    "type": "string"
+                  },
+                  "password": {
+                    "example": "infolokerboskumantab",
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "success"
+          },
+          "400": {
+            "description": "bad request"
+          },
+          "404": {
+            "description": "not found"
+          },
+          "500": {
+            "description": "internal server error"
+          },
+          "403": {
+            "description": "forbidden"
+          },
+          "401": {
+            "description": "unauthorized"
+          }
+        }
+      }
+    },
+    "/logout": {
+      "get": {
+        "tags": [
+          "Authentication and Authorization"
+        ],
+        "summary": "User Logout",
+        "description": "For User Logout",
+        "responses": {
+          "200": {
+            "description": "success"
+          },
+          "400": {
+            "description": "bad request"
+          },
+          "404": {
+            "description": "not found"
+          },
+          "500": {
+            "description": "internal server error"
+          },
+          "403": {
+            "description": "forbidden"
+          },
+          "401": {
+            "description": "unauthorized"
+          }
+        }
+      }
+    },
+    "/films": {
+      "post": {
+        "tags": [
+          "Films"
+        ],
+        "summary": "Post Film",
+        "description": "For Posting Films",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "example": 1009,
+                    "type": "integer"
+                  },
+                  "title": {
+                    "example": "Upin & Ipin Shippuden",
+                    "type": "string"
+                  },
+                  "genres": {
+                    "example": "Adventure|Action|Comedy",
+                    "type": "string"
+                  },
+                  "year": {
+                    "example": "2069",
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "success"
+          },
+          "400": {
+            "description": "bad request"
+          },
+          "404": {
+            "description": "not found"
+          },
+          "500": {
+            "description": "internal server error"
+          },
+          "403": {
+            "description": "forbidden"
+          },
+          "401": {
+            "description": "unauthorized"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Films"
+        ],
+        "summary": "Get All Films",
+        "description": "Get All Films Data",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page where user are",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 1
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Limit film showed",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 10
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "success"
+          },
+          "404": {
+            "description": "not found"
+          },
+          "500": {
+            "description": "internal server error"
+          },
+          "403": {
+            "description": "forbidden"
+          },
+          "401": {
+            "description": "unauthorized"
+          }
+        }
+      }
+    },
+    "/films/{filmId}": {
+      "get": {
+        "tags": [
+          "Films"
+        ],
+        "summary": "Get Film By ID",
+        "description": "Get Film Data By ID",
+        "parameters": [
+          {
+            "name": "filmId",
+            "in": "path",
+            "description": "ID for search film data",
+            "required": true,
+            "schema": {
+              "example": 1009,
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "success"
+          },
+          "404": {
+            "description": "not found"
+          },
+          "500": {
+            "description": "internal server error"
+          },
+          "403": {
+            "description": "forbidden"
+          },
+          "401": {
+            "description": "unauthorized"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Films"
+        ],
+        "summary": "Update Film",
+        "description": "For Update Film Data",
+        "parameters": [
+          {
+            "name": "filmId",
+            "in": "path",
+            "description": "ID for search film data",
+            "required": true,
+            "schema": {
+              "example": 1009,
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "title": {
+                    "example": "Attack on Doraemon",
+                    "type": "string"
+                  },
+                  "genres": {
+                    "example": "Adventure|Action",
+                    "type": "string"
+                  },
+                  "year": {
+                    "example": "2058",
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "success"
+          },
+          "400": {
+            "description": "bad request"
+          },
+          "404": {
+            "description": "not found"
+          },
+          "500": {
+            "description": "internal server error"
+          },
+          "403": {
+            "description": "forbidden"
+          },
+          "401": {
+            "description": "unauthorized"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Films"
+        ],
+        "summary": "Delete Film",
+        "description": "For Delete Film Data",
+        "parameters": [
+          {
+            "name": "filmId",
+            "in": "path",
+            "description": "ID for search film data",
+            "required": true,
+            "schema": {
+              "example": 1009,
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "success"
+          },
+          "400": {
+            "description": "bad request"
+          },
+          "404": {
+            "description": "not found"
+          },
+          "500": {
+            "description": "internal server error"
+          },
+          "403": {
+            "description": "forbidden"
+          },
+          "401": {
+            "description": "unauthorized"
+          }
+        }
+      }
+    },
+    "/users": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Post user",
+        "description": "For Creating New User",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "example": 1009,
+                    "type": "integer"
+                  },
+                  "email": {
+                    "example": "agathaivory04@gmail.com",
+                    "type": "string"
+                  },
+                  "gender": {
+                    "example": "Female",
+                    "type": "string"
+                  },
+                  "password": {
+                    "example": "gatagatagata",
+                    "type": "string"
+                  },
+                  "role": {
+                    "example": "Student",
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "success"
+          },
+          "400": {
+            "description": "bad request"
+          },
+          "404": {
+            "description": "not found"
+          },
+          "500": {
+            "description": "internal server error"
+          },
+          "403": {
+            "description": "forbidden"
+          },
+          "401": {
+            "description": "unauthorized"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Get All Users",
+        "description": "Get All Users Data",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page where user are",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 1
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Limit film showed",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 10
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "success"
+          },
+          "404": {
+            "description": "not found"
+          },
+          "500": {
+            "description": "internal server error"
+          },
+          "403": {
+            "description": "forbidden"
+          },
+          "401": {
+            "description": "unauthorized"
+          }
+        }
+      }
+    },
+    "/users/{userId}": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Get User By ID",
+        "description": "Get User Data By ID",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "ID for search film data",
+            "required": true,
+            "schema": {
+              "example": 1009,
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "success"
+          },
+          "404": {
+            "description": "not found"
+          },
+          "500": {
+            "description": "internal server error"
+          },
+          "403": {
+            "description": "forbidden"
+          },
+          "401": {
+            "description": "unauthorized"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Update User",
+        "description": "For Update User Data",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "ID for search user data",
+            "required": true,
+            "schema": {
+              "example": 1009,
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "example": "serigalauruguay04@gmail.com",
+                    "type": "string"
+                  },
+                  "gender": {
+                    "example": "Male",
+                    "type": "string"
+                  },
+                  "password": {
+                    "example": "darwinnyunyes",
+                    "type": "string"
+                  },
+                  "role": {
+                    "example": "Soccer Athlete",
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "success"
+          },
+          "400": {
+            "description": "bad request"
+          },
+          "404": {
+            "description": "not found"
+          },
+          "500": {
+            "description": "internal server error"
+          },
+          "403": {
+            "description": "forbidden"
+          },
+          "401": {
+            "description": "unauthorized"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Delete User",
+        "description": "For Delete User Data",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "ID for search user data",
+            "required": true,
+            "schema": {
+              "example": 1009,
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "success"
+          },
+          "400": {
+            "description": "bad request"
+          },
+          "404": {
+            "description": "not found"
+          },
+          "500": {
+            "description": "internal server error"
+          },
+          "403": {
+            "description": "forbidden"
+          },
+          "401": {
+            "description": "unauthorized"
+          }
+        }
+      }
+    }
+  }
+}
