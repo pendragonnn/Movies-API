@@ -19,7 +19,7 @@ const diskStorage = multer.diskStorage({
 
 router.use(
   "/upload",
-  express.static(path.join(__dirname, "src/upload/movie/"))
+  express.static(path.join(__dirname, "../upload/movie/"))
 );
 
 router.get("/", MovieController.showAllMovies);
@@ -28,7 +28,7 @@ router.get("/:id", MovieController.showMovieById);
 
 router.post("/", movieValidator, MovieController.addMovie);
 
-router.put(
+router.put( 
   "/poster-upload/",
   multer({ storage: diskStorage }).single("photo"),
   (req, res) => {
@@ -36,7 +36,8 @@ router.put(
     if (!file) {
       res.status(400).send({ status: "false", data: "No File is selected" });
     }
-    res.send(file);
+    
+    res.status(200).json({ status: 'success', data: file });
   }
 );
 router.put("/:id", movieValidator, MovieController.editMovie);
