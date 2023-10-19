@@ -38,32 +38,32 @@ class UserRepository {
 
   static addUser = async (id, email, gender, password, role) => {
     const query = {
-      text: "INSERT INTO users VALUES ($1, $2, $3, $4, $5) RETURNING id",
+      text: "INSERT INTO users VALUES ($1, $2, $3, $4, $5) RETURNING email, gender, role",
       values: [id, email, gender, password, role],
     };
 
     const result = await pool.query(query);
-    return result.rows[0].id;
+    return result.rows;
   };
 
   static editUser = async (id, email, gender, password, role) => {
     const query = {
-      text: "UPDATE users SET email=$2, gender=$3, password=$4, role=$5 WHERE id=$1 RETURNING id",
+      text: "UPDATE users SET email=$2, gender=$3, password=$4, role=$5 WHERE id=$1 RETURNING email, gender, role",
       values: [id, email, gender, password, role],
     };
 
     const result = await pool.query(query);
-    return result.rows[0].id;
+    return result.rows;
   };
 
   static deleteUser = async (id) => {
     const query = {
-      text: "DELETE FROM users WHERE id=$1 returning id",
+      text: "DELETE FROM users WHERE id=$1 returning email, gender, role",
       values: [id],
     };
 
     const result = await pool.query(query);
-    return result.rows[0].id;
+    return result.rows;
   };
 }
 

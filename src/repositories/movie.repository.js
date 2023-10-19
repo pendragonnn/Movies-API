@@ -37,32 +37,32 @@ class MovieRepository {
 
   static addMovie = async (id, title, genres, year) => {
     const query = {
-      text: "INSERT INTO movies VALUES ($1, $2, $3, $4) RETURNING id",
+      text: "INSERT INTO movies VALUES ($1, $2, $3, $4) RETURNING title, genres, year",
       values: [id, title, genres, year],
     };
 
     const result = await pool.query(query);
-    return result.rows[0].id;
+    return result.rows;
   };
 
   static editMovie = async (id, title, genres, year) => {
     const query = {
-      text: "UPDATE movies SET title=$2, genres=$3, year=$4 WHERE id=$1 RETURNING id",
+      text: "UPDATE movies SET title=$2, genres=$3, year=$4 WHERE id=$1 RETURNING title, genres, year",
       values: [id, title, genres, year],
     };
 
     const result = await pool.query(query);
-    return result.rows[0].id;
+    return result.rows;
   };
 
   static deleteMovie = async (id) => {
     const query = {
-      text: "DELETE FROM movies WHERE id=$1 returning id",
+      text: "DELETE FROM movies WHERE id=$1 returning title, genres, year",
       values: [id],
     };
 
     const result = await pool.query(query);
-    return result.rows[0].id;
+    return result.rows;
   };
 }
 

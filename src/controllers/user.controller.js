@@ -68,7 +68,7 @@ class UserController {
           process.env.PASSWORD_DIGEST
         )
         .toString("hex");
-      const userId = await UserModel.addUser(
+      const user = await UserModel.addUser(
         id,
         email,
         gender,
@@ -78,7 +78,8 @@ class UserController {
 
       res.status(200).json({
         status: "success",
-        message: `Success Add User With ID ${userId}`,
+        message: `Success Add User`,
+        data: user,
       });
     } catch (error) {
       return res.status(500).json({
@@ -94,9 +95,9 @@ class UserController {
       const { email, gender, password, role } = req.body;
 
       const emailExist = await UserModel.getUserByEmail(email);
-      const user = await UserModel.getUserById(id);
+      const userId = await UserModel.getUserById(id);
 
-      if (user.length === 0)
+      if (userId.length === 0)
         return res
           .status(404)
           .json({ status: "fail", message: `user not found` });
@@ -116,7 +117,7 @@ class UserController {
         )
         .toString("hex");
 
-      const userId = await UserModel.editUser(
+      const user = await UserModel.editUser(
         id,
         email,
         gender,
@@ -126,7 +127,8 @@ class UserController {
 
       res.status(200).json({
         status: "success",
-        message: `Success Update User With ID ${userId}`,
+        message: `Success Update User`,
+        newData: user,
       });
     } catch (error) {
       return res.status(500).json({
@@ -147,11 +149,12 @@ class UserController {
           .status(404)
           .json({ status: "fail", message: `user not found` });
 
-      const userId = await UserModel.deleteUser(id);
+      const user = await UserModel.deleteUser(id);
 
       res.status(200).json({
         status: "success",
-        message: `Success Delete User With ID ${userId}`,
+        message: `Success Delete User`,
+        data: user,
       });
     } catch (error) {
       return res.status(500).json({

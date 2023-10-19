@@ -17,12 +17,10 @@ class MovieController {
         data: movies,
       });
     } catch (error) {
-      return res
-        .status(500)
-        .json({
-          status: "fail",
-          message: `internal server error, ${error.message}`,
-        });
+      return res.status(500).json({
+        status: "fail",
+        message: `internal server error, ${error.message}`,
+      });
     }
   };
 
@@ -41,12 +39,10 @@ class MovieController {
         data: movie,
       });
     } catch (error) {
-      return res
-        .status(500)
-        .json({
-          status: "fail",
-          message: `internal server error, ${error.message}`,
-        });
+      return res.status(500).json({
+        status: "fail",
+        message: `internal server error, ${error.message}`,
+      });
     }
   };
 
@@ -61,19 +57,18 @@ class MovieController {
           .status(409)
           .json({ status: "fail", message: `movie ${title} already exist` });
 
-      const movieId = await MovieModel.addMovie(id, title, genres, year);
+      const movie = await MovieModel.addMovie(id, title, genres, year);
 
       res.status(200).json({
         status: "success",
-        message: `Success Add Movie With ID ${movieId}`,
+        message: `Success Add Movie`,
+        data: movie,
       });
     } catch (error) {
-      return res
-        .status(500)
-        .json({
-          status: "fail",
-          message: `internal server error, ${error.message}`,
-        });
+      return res.status(500).json({
+        status: "fail",
+        message: `internal server error, ${error.message}`,
+      });
     }
   };
 
@@ -83,9 +78,9 @@ class MovieController {
       const { title, genres, year } = req.body;
 
       const movieExist = await MovieModel.getMovieByName(title);
-      const movie = await MovieModel.getMovieById(id);
+      const movieId = await MovieModel.getMovieById(id);
 
-      if (movie.length === 0)
+      if (movieId.length === 0)
         return res
           .status(404)
           .json({ status: "fail", message: `movie not found` });
@@ -95,19 +90,18 @@ class MovieController {
           .status(409)
           .json({ status: "fail", message: `movie ${title} already exist` });
 
-      const movieId = await MovieModel.editMovie(id, title, genres, year);
+      const movie = await MovieModel.editMovie(id, title, genres, year);
 
       res.status(200).json({
         status: "success",
-        message: `Success Update Movie With ID ${movieId}`,
+        message: `Success Update Movie`,
+        newData: movie,
       });
     } catch (error) {
-      return res
-        .status(500)
-        .json({
-          status: "fail",
-          message: `internal server error, ${error.message}`,
-        });
+      return res.status(500).json({
+        status: "fail",
+        message: `internal server error, ${error.message}`,
+      });
     }
   };
 
@@ -122,19 +116,18 @@ class MovieController {
           .status(404)
           .json({ status: "fail", message: `movie not found` });
 
-      const movieId = await MovieModel.deleteMovie(id);
+      const movie = await MovieModel.deleteMovie(id);
 
       res.status(200).json({
         status: "success",
-        message: `Success Delete Movie With ID ${movieId}`,
+        message: `Success Delete Movie`,
+        deletedData: movie,
       });
     } catch (error) {
-      return res
-        .status(500)
-        .json({
-          status: "fail",
-          message: `internal server error, ${error.message}`,
-        });
+      return res.status(500).json({
+        status: "fail",
+        message: `internal server error, ${error.message}`,
+      });
     }
   };
 }
