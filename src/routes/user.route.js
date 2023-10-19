@@ -29,7 +29,7 @@ router.get("/:id", UserController.showUserById);
 router.post("/", userValidator, UserController.addUser);
 
 router.put( 
-  "/profile-upload/",
+  "/upload",
   multer({ storage: diskStorage }).single("profile-picture"),
   (req, res) => {
     const file = req.file.path;

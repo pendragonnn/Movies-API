@@ -19,12 +19,10 @@ class UserController {
         data: users,
       });
     } catch (error) {
-      return res
-        .status(500)
-        .json({
-          status: "fail",
-          message: `internal server error, ${error.message}`,
-        });
+      return res.status(500).json({
+        status: "fail",
+        message: `internal server error, ${error.message}`,
+      });
     }
   };
 
@@ -43,12 +41,10 @@ class UserController {
         data: user,
       });
     } catch (error) {
-      return res
-        .status(500)
-        .json({
-          status: "fail",
-          message: `internal server error, ${error.message}`,
-        });
+      return res.status(500).json({
+        status: "fail",
+        message: `internal server error, ${error.message}`,
+      });
     }
   };
 
@@ -85,12 +81,10 @@ class UserController {
         message: `Success Add User With ID ${userId}`,
       });
     } catch (error) {
-      return res
-        .status(500)
-        .json({
-          status: "fail",
-          message: `internal server error, ${error.message}`,
-        });
+      return res.status(500).json({
+        status: "fail",
+        message: `internal server error, ${error.message}`,
+      });
     }
   };
 
@@ -112,11 +106,21 @@ class UserController {
           .status(409)
           .json({ status: "fail", message: `user ${email} already exist` });
 
+      const encryptedPassword = crypto
+        .pbkdf2Sync(
+          password,
+          process.env.PASSWORD_SALT,
+          parseInt(process.env.PASSWORD_ITERATION),
+          parseInt(process.env.PASSWORD_KEYLEN),
+          process.env.PASSWORD_DIGEST
+        )
+        .toString("hex");
+
       const userId = await UserModel.editUser(
         id,
         email,
         gender,
-        password,
+        encryptedPassword,
         role
       );
 
@@ -125,12 +129,10 @@ class UserController {
         message: `Success Update User With ID ${userId}`,
       });
     } catch (error) {
-      return res
-        .status(500)
-        .json({
-          status: "fail",
-          message: `internal server error, ${error.message}`,
-        });
+      return res.status(500).json({
+        status: "fail",
+        message: `internal server error, ${error.message}`,
+      });
     }
   };
 
@@ -152,12 +154,10 @@ class UserController {
         message: `Success Delete User With ID ${userId}`,
       });
     } catch (error) {
-      return res
-        .status(500)
-        .json({
-          status: "fail",
-          message: `internal server error, ${error.message}`,
-        });
+      return res.status(500).json({
+        status: "fail",
+        message: `internal server error, ${error.message}`,
+      });
     }
   };
 }

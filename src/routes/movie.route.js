@@ -30,7 +30,7 @@ router.get("/:id", MovieController.showMovieById);
 router.post("/", movieValidator, MovieController.addMovie);
 
 router.put( 
-  "/poster-upload/",
+  "/upload",
   multer({ storage: diskStorage }).single("movie-poster"),
   (req, res) => {
     const file = req.file.path;

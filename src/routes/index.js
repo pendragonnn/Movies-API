@@ -3,7 +3,6 @@ const movieRouter = require("./movie.route");
 const userRouter = require("./user.route");
 const authRouter = require("./auth.route");
 const { verifyToken } = require("../middleware/tokenVerification");
-const path = require("path");
 
 const router = express.Router();
 
