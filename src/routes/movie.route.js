@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const MovieController = require("../controllers/movie.controller");
+const { MovieController } = require("../controllers/");
 const { movieValidator } = require("../middleware/dataValidator");
 const multer = require("multer");
 const path = require("path");
@@ -17,6 +17,7 @@ const diskStorage = multer.diskStorage({
   },
 });
 
+// for access http://localhost:3000/movie/upload/{{img-name}}
 router.use(
   "/upload",
   express.static(path.join(__dirname, "../upload/movie/"))
@@ -30,7 +31,7 @@ router.post("/", movieValidator, MovieController.addMovie);
 
 router.put( 
   "/poster-upload/",
-  multer({ storage: diskStorage }).single("photo"),
+  multer({ storage: diskStorage }).single("movie-poster"),
   (req, res) => {
     const file = req.file.path;
     if (!file) {
@@ -40,6 +41,7 @@ router.put(
     res.status(200).json({ status: 'success', data: file });
   }
 );
+
 router.put("/:id", movieValidator, MovieController.editMovie);
 
 router.delete("/:id", MovieController.deleteMovie);

@@ -7,7 +7,7 @@ const path = require("path");
 
 const router = express.Router();
 
-router.use("/movies", movieRouter);
+router.use("/movies", verifyToken, movieRouter);
 
 router.use("/users", verifyToken, userRouter);
 

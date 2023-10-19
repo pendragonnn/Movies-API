@@ -5,11 +5,8 @@ const swaggerUi = require("swagger-ui-express");
 const apiDocumentation = require("./src/doc/apidocs.json");
 const router = require("./src/routes/index");
 require("dotenv").config();
-const path = require('path')
 
 const app = express();
-
-console.log(path.join(__dirname, "../upload/movie/"));
 
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(apiDocumentation));
 app.use(express.json());

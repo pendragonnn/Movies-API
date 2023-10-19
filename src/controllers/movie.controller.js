@@ -1,6 +1,4 @@
-const MovieModelClass = require("../models/movie.model");
-
-const MovieModel = new MovieModelClass();
+const { MovieModel } = require("../models/");
 
 class MovieController {
   static showAllMovies = async (req, res) => {

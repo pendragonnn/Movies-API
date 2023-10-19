@@ -1,6 +1,6 @@
-const movieSchema = require("./movieSchema");
-const userLoginSchema = require("./userLoginSchema");
-const userSchema = require("./userSchema");
+const movieSchema = require("./movie.schema");
+const userLoginSchema = require("./user.login.schema");
+const userSchema = require("./user.schema");
 
 module.exports = {
   movieSchema,

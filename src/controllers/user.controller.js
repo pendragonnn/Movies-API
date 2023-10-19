@@ -1,8 +1,6 @@
-const UserModelClass = require("../models/user.model");
+const { UserModel } = require("../models/");
 const crypto = require("crypto");
 require("dotenv");
-
-const UserModel = new UserModelClass();
 
 class UserController {
   static showAllUsers = async (req, res) => {
@@ -121,11 +119,10 @@ class UserController {
         password,
         role
       );
-      console.log(userId);
 
       res.status(200).json({
         status: "success",
-        message: `Success Add User With ID ${userId}`,
+        message: `Success Update User With ID ${userId}`,
       });
     } catch (error) {
       return res

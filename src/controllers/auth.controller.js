@@ -1,9 +1,8 @@
 const jwt = require("jsonwebtoken");
 const crypto = require("crypto");
-const UserModelClass = require("../models/user.model");
+const { UserModel } = require("../models/");
 const random = require("random-string-generator");
 
-const UserModel = new UserModelClass();
 require("dotenv").config();
 
 class AuthController {
