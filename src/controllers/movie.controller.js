@@ -1,4 +1,18 @@
 const { MovieModel } = require("../models/");
+const multer = require("multer");
+const path = require("path");
+
+const diskStorage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, path.join(__dirname, "../upload/movie"));
+  },
+  filename: function (req, file, cb) {
+    cb(
+      null,
+      file.fieldname + "-" + Date.now() + path.extname(file.originalname)
+    );
+  },
+});
 
 class MovieController {
   static showAllMovies = async (req, res) => {
@@ -103,6 +117,22 @@ class MovieController {
         message: `internal server error, ${error.message}`,
       });
     }
+  };
+
+  static uploadPosterMovie = async (req, res) => {
+    const upload = multer({ storage: diskStorage }).single("movie-poster");
+    upload(req, res, (err) => {
+      if (err) {
+        return res.status(500).json({ status: "error", data: err.message });
+      }
+
+      const file = req.file.path;
+      if (!file) {
+        res.status(400).send({ status: "false", data: "No File is selected" });
+      }
+
+      res.status(200).json({ status: "success", data: file });
+    });
   };
 
   static deleteMovie = async (req, res) => {

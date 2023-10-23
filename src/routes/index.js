@@ -6,9 +6,9 @@ const { verifyToken } = require("../middleware/tokenVerification");
 
 const router = express.Router();
 
-router.use("/movies", verifyToken, movieRouter);
+router.use("/movies", movieRouter);
 
-router.use("/users", verifyToken, userRouter);
+router.use("/users", userRouter);
 
 router.use("/auth", authRouter);
 

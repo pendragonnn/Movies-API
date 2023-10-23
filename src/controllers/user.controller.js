@@ -1,6 +1,20 @@
 const { UserModel } = require("../models/");
 const crypto = require("crypto");
 require("dotenv");
+const multer = require('multer')
+const path = require('path')
+
+const diskStorage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, path.join(__dirname, "../upload/user"));
+  },
+  filename: function (req, file, cb) {
+    cb(
+      null,
+      file.fieldname + "-" + Date.now() + path.extname(file.originalname)
+    );
+  },
+});
 
 class UserController {
   static showAllUsers = async (req, res) => {
@@ -137,6 +151,22 @@ class UserController {
       });
     }
   };
+
+  static uploadProfilePhoto = async(req, res) => {
+    const upload = multer({ storage: diskStorage }).single("profile-picture");
+    upload(req, res, (err) => {
+      if (err) {
+        return res.status(500).json({ status: "error", data: err.message });
+      }
+
+      const file = req.file.path;
+      if (!file) {
+        res.status(400).send({ status: "false", data: "No File is selected" });
+      }
+
+      res.status(200).json({ status: "success", data: file });
+    });
+  }
 
   static deleteUser = async (req, res) => {
     try {
